@@ -1,0 +1,26 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: black;
+  align-items: center;
+}
+
+.navbar__menu {
+  text-decoration: none;
+  margin: 8px;
+  color: white;
+  font-size: 18px;
+}
+
+.navbar__logo {
+  text-decoration: none;
+  color: azure;
+  margin: 8px;
+}
+.navbar__logo_normal {
+  font-weight: 400;
+}
+.navbar__logo_bold {
+  font-weight: 700;
+  color: yellow;
+}
