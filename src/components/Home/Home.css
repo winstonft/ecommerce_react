@@ -1,0 +1,35 @@
+.home_container {
+    display: flex;
+    flex-direction: column;
+}
+
+.home_container__productos {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0 0 0;
+}
+
+.home_container__link {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0;
+    text-decoration: none;
+}
+
+.home__productos {
+    padding: .2rem .6rem;
+        display: flex;
+        justify-content: space-between;
+}
+
+.home__nombreProductos {
+    font-size: 2.2rem;
+    color: #252525;
+    font-weight: 700;
+    text-align: center;
+}

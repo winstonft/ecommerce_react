@@ -11,6 +11,13 @@
   color: white;
   font-size: 18px;
 }
+.navbar__category {
+  text-decoration: none;
+  margin: 16px;
+  color: yellow;
+  font-size: 16px;
+  display: flex;
+}
 
 .navbar__logo {
   text-decoration: none;

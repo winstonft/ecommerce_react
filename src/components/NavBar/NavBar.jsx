@@ -1,9 +1,9 @@
 import React from 'react'
 import CartWidget from '../CartWidget/CartWidget';
 import './NavBar.css';
+import { Link } from 'react-router-dom';
 
-export const NavBar = () => {
-    const menus = ['Inicio', 'Tienda', 'Contacto']
+export const NavBar = ({menus}) => {
   return (
     <div className='navbar'>
       <a href='/' className='navbar__logo'>
@@ -12,8 +12,9 @@ export const NavBar = () => {
         <div>
           
             {menus.map((menu, index) => {
-                return <a href='/' key={index} className="navbar__menu">{menu}</a>
+                return <Link to={menu.href} key={index} className="navbar__menu">{menu.name}</Link>
             })}
+
         </div>
         <div className='navbar__cart'><CartWidget /></div>
     </div>
