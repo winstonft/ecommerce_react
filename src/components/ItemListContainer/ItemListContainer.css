@@ -1,8 +1,33 @@
-.itemListContainer {
-    display: flex;
-    margin: 16px;
+.list__container {
+  display: flex;
+  flex-direction: column;
 }
 
-.itemListContainer__producto {
-    margin: 16px;
+.itemlist__container {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0 0 0;
+}
+
+.list__container__item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+  text-decoration: none;
+}
+
+.list__container__info {
+  padding: 0.2rem 0.6rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.list__container__items {
+  font-size: 1rem;
+  color: #2c2c2c;
+  font-weight: 700;
 }
