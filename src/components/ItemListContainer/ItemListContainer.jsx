@@ -1,30 +1,23 @@
 import { useState, useEffect } from "react";
 import Proptypes from "prop-types";
 import { Link } from "react-router-dom";
-import { listaProductos } from "../../mock";
 import "./ItemListContainer.css";
 import { useParams } from "react-router-dom";
+import {collection, getDocs, getFirestore, query, where} from 'firebase/firestore';
 
 const ItemListContainer = () => {
   const [item, setItem] = useState([]);
   const { categoriaid } = useParams();
 
   useEffect(() => {
-    const getData = new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(listaProductos);
-      }, 1000);
-    });
-    if (categoriaid) {
-      getData.then((res) =>
-        setItem(
-          res.filter(
-            (listaProductos) => listaProductos.categoria === categoriaid
-          )
-        )
-      );
+    const db = getFirestore();
+    const itemCollection = collection(db, 'productos');
+
+    if(categoriaid){
+        const queryFilter = query(itemCollection, where('categoria', '==', categoriaid))
+        getDocs(queryFilter).then(res => setItem(res.docs.map(product => ({id: product.id, ...product.data()}))) );
     } else {
-      getData.then((res) => setItem(res));
+        getDocs(itemCollection).then(res => setItem(res.docs.map(product => ({id: product.id, ...product.data()}))) );
     }
   }, [categoriaid]);
 

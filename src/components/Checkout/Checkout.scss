@@ -1,0 +1,20 @@
+.checkoutContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    p {
+        text-align: center;
+        font-size: 1.1rem;
+        margin: .3rem 1.5rem;
+    }
+    .checkoutOrder {
+        font-weight: 700;
+    }
+    a {
+        color: rgb(104, 101, 54);
+        font-size: 1.1rem;
+        margin: .8rem 0;
+    }
+}

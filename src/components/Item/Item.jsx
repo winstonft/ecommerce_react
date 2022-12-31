@@ -1,43 +1,41 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { doc, getDoc, getFirestore,} from 'firebase/firestore'
+import { useCartContext } from "../../context/CartContext";
+import ItemCount from "../ItemCount/ItemCount";
 import Proptypes from 'prop-types'
 
-const Item = ({listaProductos}) => {
+const Item = () => {
 
+    const {addProduct} = useCartContext();
     const [data, setData] = useState([]);
 
-    const {idProducto} = useParams();
+    const {itemid} = useParams();
+
+    const onAdd = (quantity) => {
+        addProduct(data,quantity);
+    }
 
     useEffect(() => {
-        const getData = new Promise(resolve => {
-            setTimeout(() => {
-                resolve(listaProductos);
-            }, 1000)
-        });
-        if(idProducto) {
-            getData.then(res => setData(res.filter(listaProductos => listaProductos.idProducto === idProducto)));
-        } else {
-            getData.then(res => setData(res));
-        } 
-    }, [idProducto])
+        const db = getFirestore();
+        const dbDoc = doc(db, 'item', itemid)
+        getDoc(dbDoc).then(res => setData({id: res.id, ...res.data() }));
+    }, [itemid])
   
 
     return (
         <div>
-                { data && data.map((producto, index) =>{
-                    const newKey = `${producto}-${index}`
-                    return (
-                        <div key={newKey}>
-                            <img src={producto.imagen} alt="" />
-                            <div>
-                                <p>{producto.nombre}</p>
-                                <p>{producto.precio}</p>
-                            </div>
-                        </div>
-                    )  
-                })
-                }     
-        </div>
+        <div>
+            <img src={data.imagen} alt="" />
+            <div>
+                <p>{data.nombre}</p>
+                <p>${data.precio}</p>
+                <ItemCount stock = {data.stock} initial = {1} onAdd={onAdd}/>
+                <p>Descripción:</p>
+                <p className="detail__itemsDesc">{data.desc}.</p>
+            </div>
+        </div> 
+    </div>
     )
 }
 

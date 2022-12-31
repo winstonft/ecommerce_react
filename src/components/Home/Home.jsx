@@ -1,7 +1,7 @@
 import Proptypes from 'prop-types'
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { tiposProductos } from "../../mock"
+import {collection, getDocs, getFirestore} from 'firebase/firestore'
 import "./Home.css";
 
 const Home = () => {
@@ -9,12 +9,10 @@ const Home = () => {
     const [info, setInfo] = useState([]);
 
     useEffect(() => {
-        const getInfo = new Promise(resolve => {
-            setTimeout(() => {
-                resolve(tiposProductos);
-            }, 1000)
-        });
-        getInfo.then(res => setInfo(res))
+        const db = getFirestore();
+        const itemCollection = collection(db, 'tipos');
+        
+        getDocs(itemCollection).then(res => setInfo(res.docs.map(product => ({id: product.id, ...product.data()}))) );
     }, [])
 
     return (
